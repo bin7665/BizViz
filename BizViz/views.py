@@ -3,8 +3,11 @@ from .models import Department, Support
 
 
 def index(request):
-    # supports = Support.objects
-    return render(request, 'BizViz/index.html')
+    supports = Support.objects.order_by('-register_date')
+    context = {
+        'supports': supports
+    }
+    return render(request, 'BizViz/index.html', context)
 
 
 def statistics(request):

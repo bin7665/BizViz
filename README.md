@@ -56,3 +56,5 @@ $ python manage.py runserver
   - 유저 friendly
   - 웹 디자인
   - 모바일 디자인
+- [ ] 보안
+  - settings의 secret key

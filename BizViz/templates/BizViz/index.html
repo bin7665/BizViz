@@ -35,13 +35,43 @@
   <div class="main-graph-container">
     <div class="graph-contents graph-support-top5">
       가장 인기 있는 지원사업 top5
-      <div class="graph-area"></div>
+      <div class="graph-area">
+        <img
+          src="https://www.open.edu/openlearn/ocw/pluginfile.php/1361832/mod_oucontent/oucontent/69747/99744364/1f21249b/wk8_fig19.tif.jpg"
+          alt="bar chart 1"
+        />
+      </div>
     </div>
     <div class="graph-contents graph-depart-top5">
       공고를 많이 낸 부처/지자체 top5
-      <div class="graph-area"></div>
+      <div class="graph-area">
+        <img
+          src="https://images.ctfassets.net/fevtq3bap7tj/5FSJrJeDIIGAmGCsGcQ8S4/e2fc867a487614b47f72104a36fbcf7f/simple-column.png"
+          alt="bar chart 2"
+        />
+      </div>
     </div>
   </div>
-  <div class="main-support-container"></div>
+  <div class="main-support-container">
+    <ul class="supports-list">
+      {% for support in supports %}
+      <li class="support-container">
+        <div class="support-name">
+          제목: {{ support.project_name }}
+        </div>
+        <div class="support-date">기간: {{ support.period_date }}</div>
+        <div class="support-depart">
+          부서: {{ support.project_depart }}
+        </div>
+        <div class="support-hits">
+          조회수: {{ support.project_hits }}
+        </div>
+        <div class="support-register">
+          등록 시간: {{ support.register_date }}
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
 {% endblock %}
