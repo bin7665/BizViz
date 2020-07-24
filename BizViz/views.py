@@ -30,4 +30,11 @@ def department(request, pk):
 
 def content(request, pk):
     support = get_object_or_404(Support, pk=pk)
-    return render(request, 'BizViz/content.html', {'support': support})
+    URL = 'http://www.bizinfo.go.kr/see/seea/selectSEEA140Detail.do?pblancId={0}&menuId=80001001001'.format(
+        support.project_url)
+    # support_url = render_to_string(URL)
+    context = {
+        'support': support,
+        'URL': URL
+    }
+    return render(request, 'BizViz/content.html', context)

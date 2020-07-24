@@ -1,2 +1,62 @@
-부서별 통계가 보여질 페이지입니다.<br />
-department name: {{ depart }}
+{% load static %}
+<head>
+  <title>BizViz | 지원사업 검색을 한 눈에</title>
+  <script
+    src="https://kit.fontawesome.com/5069658de9.js"
+    crossorigin="anonymous"
+  ></script>
+</head>
+<!-- modal 사용시 윗 부분 삭제 가능 -->
+<div class="department-container">
+  <div class="department-description">
+    <div class="department-logo">
+      <img
+        src="{% static depart.depart_image %}"
+        alt="{{ depart.depart_name }} logo"
+      />
+    </div>
+    <div class="department-description-detail">
+      <table class="department-detail-table">
+        <tr>
+          <td>부서이름</td>
+          <td>{{ depart.depart_name }}</td>
+        </tr>
+        <tr>
+          <td>부서위치</td>
+          <td>{{ depart.depart_loc }}</td>
+        </tr>
+        <tr>
+          <td>지원사업</td>
+          <td>{{ depart.total_project }}</td>
+        </tr>
+        <tr>
+          <td rowspan="3">예산</td>
+          <td>세입 {{ depart.tax_income }}</td>
+        </tr>
+        <tr>
+          <td>세출 {{ depart.tax_outcome }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="department-graph">
+    <div class="department-graph-filter">
+      <span class="department-filter-btn">
+        지역 <i class="fas fa-caret-down"></i>
+      </span>
+    </div>
+    <div class="department-graph-container">
+      <img
+        src="https://i1.wp.com/hleecaster.com/wp-content/uploads/2019/08/4-1.png?w=1200"
+        alt="pie chart 1"
+      />
+    </div>
+    <div class="department-graph-container">
+      <img
+        src="https://i.pinimg.com/originals/58/d5/dd/58d5dd8f888d50125d65f3141b4c2c19.png"
+        alt="line chart 1"
+      />
+    </div>
+  </div>
+</div>
+<!-- {{ depart }} -->

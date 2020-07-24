@@ -14,7 +14,7 @@ class Support(models.Model):
     project_name = models.CharField(max_length=200)
     period_date = models.CharField(max_length=50)
     project_depart = models.CharField(max_length=50)
-    project_url = models.CharField(max_length=150)
+    project_url = models.CharField(max_length=30)
     project_hits = models.IntegerField(default=0)
     register_date = models.DateTimeField(default=datetime.now())
 
