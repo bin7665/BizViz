@@ -1,7 +1,7 @@
 # BizViz
 
-BizBot 지원사업 검색을 위한 웹페이지입니다.
-아래 코드를 통해 필요한 패키지를 다운받을 수 있습니다.
+BizBot 지원사업 검색을 위한 웹페이지입니다.  
+아래 코드를 통해 필요한 패키지를 다운받을 수 있습니다.  
 
 ```bash
 $ pip install -r requirements.txt
@@ -9,8 +9,8 @@ $ pip install -r requirements.txt
 
 <br/>
 
-장고 프로젝트로 만들었으며 임시 관리자 계정은 admin/admin입니다.
-아래 코드를 통해 프로젝트를 실행할 수 있습니다.
+장고 프로젝트로 만들었으며 임시 관리자 계정은 admin/admin입니다.  
+아래 코드를 통해 프로젝트를 실행할 수 있습니다.  
 
 ```bash
 $ python manage.py runserver

@@ -3,6 +3,7 @@ from .models import Department, Support
 
 
 def index(request):
+    # supports = Support.objects
     return render(request, 'BizViz/index.html')
 
 
