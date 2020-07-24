@@ -1,5 +1,26 @@
 {% extends 'BizViz/base.html' %} {% block content %}
 <div class="content">
-  부서별 통계를 찾아볼 수 있는 페이지입니다
+  <div class="main-statistics-compare">
+    <div class="statistics-compare-select">
+      비교할 부서/지자체를 선택해주세요.
+      <br />
+      <span class="compare-selected-depart">
+        부처/지자체(39/39)<i class="fas fa-caret-down"></i>
+      </span>
+      <span class="compare-selected-depart">
+        부처/지자체(39/39)<i class="fas fa-caret-down"></i>
+      </span>
+    </div>
+    <div class="statistics-compare-area">
+      <div class="statistics-container">
+        <!-- <iframe src="1" frameborder="0"></iframe> -->
+        {{ basic }}
+      </div>
+      <div class="statistics-container">
+        <!-- <iframe src="2" frameborder="0"></iframe> -->
+        {{ compare }}
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.template.loader import render_to_string
 from .models import Department, Support
 
 
@@ -11,7 +12,15 @@ def index(request):
 
 
 def statistics(request):
-    return render(request, 'BizViz/statistics.html')
+    # To Do: pk에 값을 넣는 게 아니라 원하는 값이 들어올 수 있도록
+    depart_basic = get_object_or_404(Department, pk=1)
+    depart_compare = get_object_or_404(Department, pk=2)
+
+    context = {
+        'basic': render_to_string('BizViz/department.html', {'depart': depart_basic}),
+        'compare': render_to_string('BizViz/department.html', {'depart': depart_compare})
+    }
+    return render(request, 'BizViz/statistics.html', context)
 
 
 def department(request, pk):
