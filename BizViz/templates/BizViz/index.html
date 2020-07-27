@@ -1,55 +1,71 @@
 {% extends 'BizViz/base.html' %} {% block content %}
 <div class="content">
-  <div class="main-search-container">
-    <div class="main-title">
-      <h1>관심 있는 지원사업을 검색해보세요.</h1>
+  <div class="main-search-container container">
+    <div class="main-title row">
+      <div class="col d-flex justify-content-center py-5">
+        <h1>관심 있는 지원사업을 검색해보세요.</h1>
+      </div>
     </div>
-    <div class="main-search-part">
-      <input type="text" id="support-search" class="search" />
-      <span class="search-btn">검색 <i class="fas fa-search"></i></span>
+    <div class="main-search-part row text-center py-2">
+      <div class="col input-group">
+        <input type="text" class="support-search form-control" />
+        <div class="input-group-append">
+          <span class="search-btn btn">검색 <i class="fas fa-search"></i></span>
+        </div>
+      </div>
     </div>
-    <div class="main-search-filter">
-      <div class="search-reset">검색조건 <i class="fas fa-sync-alt"></i></div>
-      <div class="search-filter-region">
+    <div class="main-search-filter row d-flex justify-content-center">
+      <div class="search-reset col-2">
+        검색조건 <i class="fas fa-sync-alt"></i>
+      </div>
+      <div class="search-filter-region col-2">
         <span class="search-filter-btn">
           지역(17/17) <i class="fas fa-caret-down"></i>
         </span>
       </div>
-      <div class="search-filter-category">
+      <div class="search-filter-category col-2">
         <span class="search-filter-btn">
           분야(45/45) <i class="fas fa-caret-down"></i>
         </span>
       </div>
-      <div class="search-filter-business_type">
+      <div class="search-filter-business_type col-2">
         <span class="search-filter-btn">
           기업 형태(9/9) <i class="fas fa-caret-down"></i>
         </span>
       </div>
-      <div class="search-filter-department">
+      <div class="search-filter-department col-2">
         <span class="search-filter-btn">
           부처/지자체(39/39) <i class="fas fa-caret-down"></i>
         </span>
       </div>
     </div>
   </div>
-  <div class="main-graph-container">
-    <div class="graph-contents graph-support-top5">
-      가장 인기 있는 지원사업 top5
-      <div class="main-graph-container">
-        <img
-          src="https://www.open.edu/openlearn/ocw/pluginfile.php/1361832/mod_oucontent/oucontent/69747/99744364/1f21249b/wk8_fig19.tif.jpg"
-          alt="bar chart 1"
-        />
+  <div class="main-graph-container container py-3">
+    <div class="row py-5">
+      <div class="graph-contents graph-support-top5 col">
+        <div class="main-graph-title">
+          가장 인기 있는 지원사업 top5
+        </div>
+        <div class="main-graph-container">
+          <img
+            src="https://www.open.edu/openlearn/ocw/pluginfile.php/1361832/mod_oucontent/oucontent/69747/99744364/1f21249b/wk8_fig19.tif.jpg"
+            alt="bar chart 1"
+          />
+        </div>
       </div>
-    </div>
-    <div class="graph-contents graph-depart-top5">
-      공고를 많이 낸 부처/지자체 top5
-      <div class="main-graph-container">
-        <img
-          src="https://images.ctfassets.net/fevtq3bap7tj/5FSJrJeDIIGAmGCsGcQ8S4/e2fc867a487614b47f72104a36fbcf7f/simple-column.png"
-          alt="bar chart 2"
-        />
-        부서/지자체 조건은 영향을 미치지 않습니다.
+      <div class="graph-contents graph-depart-top5 col">
+        <div class="main-graph-title">
+          공고를 많이 낸 부처/지자체 top5 <i class="fas fa-info-circle"></i>
+        </div>
+        <!-- <div class="graph-depart-warning">
+          부서/지자체 조건은 영향을 미치지 않습니다.
+        </div> -->
+        <div class="main-graph-container">
+          <img
+            src="https://images.ctfassets.net/fevtq3bap7tj/5FSJrJeDIIGAmGCsGcQ8S4/e2fc867a487614b47f72104a36fbcf7f/simple-column.png"
+            alt="bar chart 2"
+          />
+        </div>
       </div>
     </div>
   </div>
