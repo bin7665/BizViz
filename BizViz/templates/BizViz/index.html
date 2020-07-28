@@ -2,11 +2,11 @@
 <div class="content">
   <div class="main-search-container container">
     <div class="main-title row">
-      <div class="col d-flex justify-content-center py-5">
+      <div class="col d-flex justify-content-center mt-5 pt-5">
         <h1>관심 있는 지원사업을 검색해보세요.</h1>
       </div>
     </div>
-    <div class="main-search-part row text-center py-2">
+    <div class="main-search-part row text-center my-2">
       <div class="col input-group">
         <input type="text" class="support-search form-control" />
         <div class="input-group-append">
@@ -40,15 +40,15 @@
       </div>
     </div>
   </div>
-  <div class="main-graph-container container py-3">
-    <div class="row py-5">
+  <div class="main-graph-container container my-3">
+    <div class="row my-5">
       <div class="graph-contents graph-support-top5 col">
         <div class="main-graph-title">
           가장 인기 있는 지원사업 top5
         </div>
         <div class="main-graph-container">
           <img
-            src="https://www.open.edu/openlearn/ocw/pluginfile.php/1361832/mod_oucontent/oucontent/69747/99744364/1f21249b/wk8_fig19.tif.jpg"
+            src="https://i1.wp.com/hleecaster.com/wp-content/uploads/2019/08/4.png?w=1200"
             alt="bar chart 1"
           />
         </div>
@@ -58,6 +58,7 @@
           공고를 많이 낸 부처/지자체 top5 <i class="fas fa-info-circle"></i>
         </div>
         <!-- <div class="graph-depart-warning">
+          information icon 클릭 시에 표시 --
           부서/지자체 조건은 영향을 미치지 않습니다.
         </div> -->
         <div class="main-graph-container">
@@ -69,26 +70,37 @@
       </div>
     </div>
   </div>
-  <div class="main-support-container">
-    <ul class="supports-list">
+  <div class="main-support-container container mb-5">
+    <div class="supports-list row">
       {% for support in supports %}
-      <li class="support-container">
-        <div class="support-name">
-          제목: {{ support.project_name }}
+      <div class="col-12 col-sm-6 col-xl-4 my-3">
+        <div class="support-card card h-100">
+          <div class="card-header">
+            <div class="support-depart">
+              <h6 class="m-0">
+                {{ support.project_depart }}
+                <i class="fas fa-search-plus"></i>
+              </h6>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="support-name card-title">
+              <h5>{{ support.project_name }}</h5>
+            </div>
+            <div class="support-d-day card-subtitle d-flex justify-content-end">
+              D - 20
+            </div>
+          </div>
+          <div class="card-footer d-flex justify-content-between">
+            <div class="support-date">{{ support.period_date }}</div>
+            <div class="support-hits">
+              views: {{ support.project_hits }}
+            </div>
+          </div>
         </div>
-        <div class="support-date">기간: {{ support.period_date }}</div>
-        <div class="support-depart">
-          부서: {{ support.project_depart }}
-        </div>
-        <div class="support-hits">
-          조회수: {{ support.project_hits }}
-        </div>
-        <div class="support-register">
-          등록 시간: {{ support.register_date }}
-        </div>
-      </li>
+      </div>
       {% endfor %}
-    </ul>
+    </div>
   </div>
 </div>
 {% endblock %}
