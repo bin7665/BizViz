@@ -58,3 +58,7 @@ $ python manage.py runserver
   - 모바일 디자인
 - [ ] 보안
   - settings의 secret key
+  
+이슈
+- [ ] 공고를 많이 낸 부서 TOP5 데이터
+  - 5위와 6위의 값이 같을 경우
