@@ -1,23 +1,38 @@
-{% extends 'BizViz/base.html' %} {% block content %}
+{% extends 'BizViz/base.html' %} {% block active %}
+<li class="nav-item">
+  <a class="nav-link" href="/">검색<span class="sr-only">Home</span></a>
+</li>
+<li class="nav-item active">
+  <a class="nav-link" href="/statistics/">통계 • 분석</a>
+</li>
+{% endblock %} {% block content %}
 <div class="content">
   <div class="main-statistics-compare">
-    <div class="statistics-compare-select">
-      비교할 부서/지자체를 선택해주세요.
-      <br />
-      <span class="compare-selected-depart">
-        부처/지자체(39/39)<i class="fas fa-caret-down"></i>
-      </span>
-      <span class="compare-selected-depart">
-        부처/지자체(39/39)<i class="fas fa-caret-down"></i>
-      </span>
+    <div class="statistics-compare-title m-5 text-center">
+      <h2>
+        비교할 부서/지자체를 선택해주세요.
+      </h2>
     </div>
-    <div class="statistics-compare-area">
-      <div class="statistics-container">
+    <div class="statistics-compare-area d-flex justify-content-around mb-5">
+      <div class="statistics-container ml-5">
+        <div class="select-depart m-2">
+          <span class="compare-selected-depart">
+            중소벤처기업부 <i class="fas fa-caret-down"></i>
+          </span>
+        </div>
         <!-- <iframe src="1" frameborder="0"></iframe> -->
         {{ basic }}
       </div>
-      <div class="statistics-container">
+      <div class="compare-exchange align-self-center">
+        <i class="fas fa-exchange-alt fa-4x"></i>
+      </div>
+      <div class="statistics-container mr-5">
         <!-- <iframe src="2" frameborder="0"></iframe> -->
+        <div class="select-depart m-2">
+          <span class="compare-selected-depart">
+            산업통상자원부 <i class="fas fa-caret-down"></i>
+          </span>
+        </div>
         {{ compare }}
       </div>
     </div>

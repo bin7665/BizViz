@@ -1,4 +1,11 @@
-{% extends 'BizViz/base.html' %} {% block content %}
+{% extends 'BizViz/base.html' %} {% block active %}
+<li class="nav-item active">
+  <a class="nav-link" href="/">검색<span class="sr-only">Home</span></a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="/statistics/">통계 • 분석</a>
+</li>
+{% endblock %} {% block content %}
 <div class="content">
   <div class="main-search-container container">
     <div class="main-title row">
@@ -72,8 +79,11 @@
   </div>
   <div class="main-support-container container mb-5">
     <div class="supports-list row">
+      <!-- css 분리 시키기 -->
+      <!-- title이 50자 이상일 때는 뒤에 ... 붙이기 -->
+      <!-- card background에 기업마당 로고나 bizbot 로고 넣으면 괜찮을 듯 -->
       {% for support in supports %}
-      <div class="col-12 col-sm-6 col-xl-4 my-3">
+      <div class="col-12 col-sm-6 col-xl-4 my-3" style="height: 15rem;">
         <div class="support-card card h-100">
           <div class="card-header">
             <div class="support-depart">
@@ -83,11 +93,11 @@
               </h6>
             </div>
           </div>
-          <div class="card-body">
+          <div class="card-body d-flex flex-column justify-content-between">
             <div class="support-name card-title">
               <h5>{{ support.project_name }}</h5>
             </div>
-            <div class="support-d-day card-subtitle d-flex justify-content-end">
+            <div class="support-d-day card-subtitle align-self-end">
               D - 20
             </div>
           </div>
