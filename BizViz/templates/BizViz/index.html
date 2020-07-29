@@ -1,6 +1,11 @@
-{% extends 'BizViz/base.html' %} {% block active %}
+{% extends 'BizViz/base.html' %} {% load static %} {% block import %}
+<script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+{% endblock %} {% block active %}
 <li class="nav-item active">
-  <a class="nav-link" href="/">검색<span class="sr-only">Home</span></a>
+  <a class="nav-link" href="/"
+    >검색
+    <div class="sr-only">Home</div></a
+  >
 </li>
 <li class="nav-item">
   <a class="nav-link" href="/statistics/">통계 • 분석</a>
@@ -17,7 +22,7 @@
       <div class="col input-group">
         <input type="text" class="support-search form-control" />
         <div class="input-group-append">
-          <span class="search-btn btn">검색 <i class="fas fa-search"></i></span>
+          <div class="search-btn btn">검색 <i class="fas fa-search"></i></div>
         </div>
       </div>
     </div>
@@ -26,24 +31,242 @@
         검색조건 <i class="fas fa-sync-alt"></i>
       </div>
       <div class="search-filter-region col-2">
-        <span class="search-filter-btn">
-          지역(17/17) <i class="fas fa-caret-down"></i>
-        </span>
+        <div class="search-filter-btn">
+          <!--  <i class="fas fa-caret-down"></i> -->
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              data-display="static"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              지역(17/17)
+            </button>
+            <!-- .dropdown .show {display: block;} 넣으면 안 움직임 -->
+            <!-- 이쪽 너무 긴데... 자바스크리브로 짜는 게 좋으려나? -->
+            <div
+              class="region-filter dropdown-menu p-2"
+              style="width: 20rem; display: block;"
+            >
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  value="도"
+                  class="custom-control-input"
+                  id="customCheck1"
+                />
+                <label for="customCheck1" class="custom-control-label"
+                  >도</label
+                >
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  value="경기"
+                  class="custom-control-input"
+                  id="customCheck2"
+                />
+                <label for="customCheck2" class="custom-control-label"
+                  >경기</label
+                >
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  value="강원"
+                  class="custom-control-input"
+                  id="customCheck3"
+                />
+                <label for="customCheck3" class="custom-control-label"
+                  >강원</label
+                >
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  value="충북"
+                  class="custom-control-input"
+                  id="customCheck4"
+                />
+                <label for="customCheck4" class="custom-control-label"
+                  >충북</label
+                >
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  value="충남"
+                  class="custom-control-input"
+                  id="customCheck5"
+                />
+                <label for="customCheck5" class="custom-control-label"
+                  >충남</label
+                >
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  value="전북"
+                  class="custom-control-input"
+                  id="customCheck6"
+                />
+                <label for="customCheck6" class="custom-control-label"
+                  >전북</label
+                >
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  value="전남"
+                  class="custom-control-input"
+                  id="customCheck7"
+                />
+                <label for="customCheck7" class="custom-control-label"
+                  >전남</label
+                >
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  value="경북"
+                  class="custom-control-input"
+                  id="customCheck8"
+                />
+                <label for="customCheck8" class="custom-control-label"
+                  >경북</label
+                >
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  value="경남"
+                  class="custom-control-input"
+                  id="customCheck9"
+                />
+                <label for="customCheck9" class="custom-control-label"
+                  >경남</label
+                >
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  value="시"
+                  class="custom-control-input"
+                  id="customCheck10"
+                />
+                <label for="customCheck10" class="custom-control-label"
+                  >시</label
+                >
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  value="서울"
+                  class="custom-control-input"
+                  id="customCheck11"
+                />
+                <label for="customCheck11" class="custom-control-label"
+                  >서울</label
+                >
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  value="부산"
+                  class="custom-control-input"
+                  id="customCheck12"
+                />
+                <label for="customCheck12" class="custom-control-label"
+                  >부산</label
+                >
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  value="대구"
+                  class="custom-control-input"
+                  id="customCheck13"
+                />
+                <label for="customCheck13" class="custom-control-label"
+                  >대구</label
+                >
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  value="인천"
+                  class="custom-control-input"
+                  id="customCheck14"
+                />
+                <label for="customCheck14" class="custom-control-label"
+                  >인천</label
+                >
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  value="광주"
+                  class="custom-control-input"
+                  id="customCheck15"
+                />
+                <label for="customCheck15" class="custom-control-label"
+                  >광주</label
+                >
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  value="대전"
+                  class="custom-control-input"
+                  id="customCheck16"
+                />
+                <label for="customCheck16" class="custom-control-label"
+                  >대전</label
+                >
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  value="세종"
+                  class="custom-control-input"
+                  id="customCheck17"
+                />
+                <label for="customCheck17" class="custom-control-label"
+                  >세종</label
+                >
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  value="제주"
+                  class="custom-control-input"
+                  id="customCheck18"
+                />
+                <label for="customCheck18" class="custom-control-label"
+                  >제주</label
+                >
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="search-filter-category col-2">
-        <span class="search-filter-btn">
+        <div class="search-filter-btn">
           분야(45/45) <i class="fas fa-caret-down"></i>
-        </span>
+        </div>
       </div>
       <div class="search-filter-business_type col-2">
-        <span class="search-filter-btn">
+        <div class="search-filter-btn">
           기업 형태(9/9) <i class="fas fa-caret-down"></i>
-        </span>
+        </div>
       </div>
       <div class="search-filter-department col-2">
-        <span class="search-filter-btn">
+        <div class="search-filter-btn">
           부처/지자체(39/39) <i class="fas fa-caret-down"></i>
-        </span>
+        </div>
       </div>
     </div>
   </div>
