@@ -1,6 +1,4 @@
-{% extends 'BizViz/base.html' %} {% load static %} {% block import %}
-<script type="text/javascript" src="{% static 'js/index.js' %}"></script>
-{% endblock %} {% block active %}
+{% extends 'BizViz/base.html' %} {% load static %}{% block active %}
 <li class="nav-item active">
   <a class="nav-link" href="/"
     >검색
@@ -27,12 +25,12 @@
       </div>
     </div>
     <div class="main-search-filter row d-flex justify-content-center">
-      <div class="search-reset col-2">
+      <!-- 이건 나중에 바꿔야겠다. 그냥은 별로 안 예쁨 -->
+      <div class="search-reset col-12 col-sm-2">
         검색조건 <i class="fas fa-sync-alt"></i>
       </div>
-      <div class="search-filter-region col-2">
+      <div class="search-filter-region col-12 col-sm-2">
         <div class="search-filter-btn">
-          <!--  <i class="fas fa-caret-down"></i> -->
           <div class="dropdown">
             <button
               class="btn btn-sm btn-secondary dropdown-toggle"
@@ -41,251 +39,81 @@
               data-toggle="dropdown"
               aria-expanded="false"
             >
-              지역(17/17)
+              지역 (17/17)
             </button>
-            <!-- .dropdown .show {display: block;} 넣으면 안 움직임 -->
-            <!-- 이쪽 너무 긴데... 자바스크립트로 짜는 게 좋으려나? -->
             <!-- checkbox 범위 조정하는 건 나중에 자바스크립트로 button을 만들어주자 -->
             <style>
               .region-filter {
                 width: 25rem;
               }
             </style>
-            <form class="region-filter dropdown-menu p-2">
-              <div class="custom-control custom-checkbox mt-1 ml-1">
-                <input
-                  type="checkbox"
-                  value="도"
-                  class="custom-control-input"
-                  id="regionFilter1"
-                />
-                <label for="regionFilter1" class="custom-control-label"
-                  >도</label
-                >
-              </div>
-              <div class="do-container container ml-3">
-                <div class="row">
-                  <div class="custom-control custom-checkbox h-100 mt-1 mr-2">
-                    <input
-                      type="checkbox"
-                      value="경기"
-                      class="custom-control-input"
-                      id="regionFilter2"
-                    />
-                    <label for="regionFilter2" class="custom-control-label"
-                      >경기도</label
-                    >
-                  </div>
-                  <div class="custom-control custom-checkbox h-100 mt-1 mr-2">
-                    <input
-                      type="checkbox"
-                      value="강원"
-                      class="custom-control-input"
-                      id="regionFilter3"
-                    />
-                    <label for="regionFilter3" class="custom-control-label"
-                      >강원도</label
-                    >
-                  </div>
-                  <div class="custom-control custom-checkbox h-100 mt-1 mr-2">
-                    <input
-                      type="checkbox"
-                      value="충북"
-                      class="custom-control-input"
-                      id="regionFilter4"
-                    />
-                    <label for="regionFilter4" class="custom-control-label"
-                      >충청북도</label
-                    >
-                  </div>
-                  <div class="custom-control custom-checkbox h-100 mt-1 mr-2">
-                    <input
-                      type="checkbox"
-                      value="충남"
-                      class="custom-control-input"
-                      id="regionFilter5"
-                    />
-                    <label for="regionFilter5" class="custom-control-label"
-                      >충청남도</label
-                    >
-                  </div>
-                  <div class="custom-control custom-checkbox h-100 mt-1 mr-2">
-                    <input
-                      type="checkbox"
-                      value="전북"
-                      class="custom-control-input"
-                      id="regionFilter6"
-                    />
-                    <label for="regionFilter6" class="custom-control-label"
-                      >전라북도</label
-                    >
-                  </div>
-                  <div class="custom-control custom-checkbox h-100 mt-1 mr-2">
-                    <input
-                      type="checkbox"
-                      value="전남"
-                      class="custom-control-input"
-                      id="regionFilter7"
-                    />
-                    <label for="regionFilter7" class="custom-control-label"
-                      >전라남도</label
-                    >
-                  </div>
-                  <div class="custom-control custom-checkbox h-100 mt-1 mr-2">
-                    <input
-                      type="checkbox"
-                      value="경북"
-                      class="custom-control-input"
-                      id="regionFilter8"
-                    />
-                    <label for="regionFilter8" class="custom-control-label"
-                      >경상북도</label
-                    >
-                  </div>
-                  <div class="custom-control custom-checkbox h-100 mt-1 mr-2">
-                    <input
-                      type="checkbox"
-                      value="경남"
-                      class="custom-control-input"
-                      id="regionFilter9"
-                    />
-                    <label for="regionFilter9" class="custom-control-label"
-                      >경상남도</label
-                    >
-                  </div>
-                  <div class="custom-control custom-checkbox h-100 mt-1 mr-2">
-                    <input
-                      type="checkbox"
-                      value="제주"
-                      class="custom-control-input"
-                      id="regionFilter10"
-                    />
-                    <label for="regionFilter10" class="custom-control-label"
-                      >제주특별자치도</label
-                    >
-                  </div>
-                </div>
-              </div>
-              <div class="custom-control custom-checkbox ml-1 mt-1">
-                <input
-                  type="checkbox"
-                  value="시"
-                  class="custom-control-input"
-                  id="regionFilter11"
-                />
-                <label for="regionFilter11" class="custom-control-label"
-                  >시</label
-                >
-              </div>
-              <div class="city-container container ml-3">
-                <div class="row">
-                  <div class="custom-control custom-checkbox h-100 mt-1 mr-2">
-                    <input
-                      type="checkbox"
-                      value="서울"
-                      class="custom-control-input"
-                      id="regionFilter12"
-                    />
-                    <label for="regionFilter12" class="custom-control-label"
-                      >서울특별시</label
-                    >
-                  </div>
-                  <div class="custom-control custom-checkbox h-100 mt-1 mr-2">
-                    <input
-                      type="checkbox"
-                      value="부산"
-                      class="custom-control-input"
-                      id="regionFilter13"
-                    />
-                    <label for="regionFilter13" class="custom-control-label"
-                      >부산광역시</label
-                    >
-                  </div>
-                  <div class="custom-control custom-checkbox h-100 mt-1 mr-2">
-                    <input
-                      type="checkbox"
-                      value="대구"
-                      class="custom-control-input"
-                      id="regionFilter14"
-                    />
-                    <label for="regionFilter14" class="custom-control-label"
-                      >대구광역시</label
-                    >
-                  </div>
-                  <div class="custom-control custom-checkbox h-100 mt-1 mr-2">
-                    <input
-                      type="checkbox"
-                      value="인천"
-                      class="custom-control-input"
-                      id="regionFilter15"
-                    />
-                    <label for="regionFilter15" class="custom-control-label"
-                      >인천광역시</label
-                    >
-                  </div>
-                  <div class="custom-control custom-checkbox h-100 mt-1 mr-2">
-                    <input
-                      type="checkbox"
-                      value="광주"
-                      class="custom-control-input"
-                      id="regionFilter16"
-                    />
-                    <label for="regionFilter16" class="custom-control-label"
-                      >광주광역시</label
-                    >
-                  </div>
-                  <div class="custom-control custom-checkbox h-100 mt-1 mr-2">
-                    <input
-                      type="checkbox"
-                      value="대전"
-                      class="custom-control-input"
-                      id="regionFilter17"
-                    />
-                    <label for="regionFilter17" class="custom-control-label"
-                      >대전광역시</label
-                    >
-                  </div>
-                  <div class="custom-control custom-checkbox h-100 mt-1 mr-2">
-                    <input
-                      type="checkbox"
-                      value="세종"
-                      class="custom-control-input"
-                      id="regionFilter18"
-                    />
-                    <label for="regionFilter18" class="custom-control-label"
-                      >세종특별자치시</label
-                    >
-                  </div>
-                </div>
-              </div>
-              <div class="btn-container d-flex justify-content-end">
-                <button type="reset" class="btn btn-sm btn-outline-primary">
-                  초기화
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-sm btn-outline-primary ml-2"
-                >
-                  적용
-                </button>
-              </div>
-            </form>
+            <form class="region-filter dropdown-menu p-2"></form>
           </div>
         </div>
       </div>
-      <div class="search-filter-category col-2">
+      <div class="search-filter-category col-12 col-sm-2">
         <div class="search-filter-btn">
-          분야(45/45) <i class="fas fa-caret-down"></i>
+          <div class="dropdown">
+            <button
+              class="btn btn-sm btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-expanded="false"
+            >
+              분야 (45/45)
+            </button>
+            <style>
+              .category-filter {
+                width: 30rem;
+              }
+            </style>
+            <form class="category-filter dropdown-menu p-2"></form>
+          </div>
         </div>
       </div>
-      <div class="search-filter-business_type col-2">
+      <div class="search-filter-business_type col-12 col-sm-2">
         <div class="search-filter-btn">
-          기업 형태(9/9) <i class="fas fa-caret-down"></i>
+          <div class="dropdown">
+            <button
+              class="btn btn-sm btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-expanded="false"
+            >
+              기업형태 (7/7)
+            </button>
+            <style>
+              .business-filter {
+                width: 1rem;
+              }
+            </style>
+            <form class="business-filter dropdown-menu p-2"></form>
+          </div>
         </div>
       </div>
-      <div class="search-filter-department col-2">
+      <div class="search-filter-department col-12 col-sm-2">
         <div class="search-filter-btn">
-          부처/지자체(39/39) <i class="fas fa-caret-down"></i>
+          <div class="dropdown">
+            <button
+              class="btn btn-sm btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-expanded="false"
+            >
+              부처 / 지자체 (39/39)
+            </button>
+            <style>
+              .department-filter {
+                width: 45rem;
+              }
+            </style>
+            <form
+              class="department-filter dropdown-menu dropdown-menu-right p-2"
+            ></form>
+          </div>
         </div>
       </div>
     </div>
@@ -333,8 +161,8 @@
       <!-- title이 50자 이상일 때는 뒤에 ... 붙이기 -->
       <!-- card background에 기업마당 로고나 bizbot 로고 넣으면 괜찮을 듯 -->
       {% for support in supports %}
-      <div class="col-12 col-sm-6 col-xl-4 my-3" style="height: 15rem;">
-        <div class="support-card card">
+      <div class="col-12 col-sm-6 col-xl-4 my-3">
+        <div class="support-card card" style="height: 15.5rem;">
           <div class="card-header">
             <div class="support-depart">
               <h6 class="m-0">
@@ -370,4 +198,11 @@
     $('[data-toggle="tooltip"]').tooltip();
   });
 </script>
+<!-- <script>
+  const regionFilter = document.querySelector(".region-filter");
+  regionFilter.innerHTML = regionFilter.innerHTML =
+    '<div class="custom-control custom-checkbox mt-1 ml-1">    <input      type="checkbox"      value="도"      class="custom-control-input"      id="regionFilter1"    />    <label for="regionFilter1" class="custom-control-label"      >도</label    >  </div>  <div class="do-container container ml-3">    <div class="row">      <div class="custom-control custom-checkbox h-100 mt-1 mr-2">        <input          type="checkbox"          value="경기"          class="custom-control-input"          id="regionFilter2"        />        <label for="regionFilter2" class="custom-control-label"          >경기도</label        >      </div>      <div class="custom-control custom-checkbox h-100 mt-1 mr-2">        <input          type="checkbox"          value="강원"          class="custom-control-input"          id="regionFilter3"        />        <label for="regionFilter3" class="custom-control-label"          >강원도</label        >      </div>      <div class="custom-control custom-checkbox h-100 mt-1 mr-2">        <input          type="checkbox"          value="충북"          class="custom-control-input"          id="regionFilter4"        />        <label for="regionFilter4" class="custom-control-label"          >충청북도</label        >      </div>      <div class="custom-control custom-checkbox h-100 mt-1 mr-2">        <input          type="checkbox"          value="충남"          class="custom-control-input"          id="regionFilter5"        />        <label for="regionFilter5" class="custom-control-label"          >충청남도</label        >      </div>      <div class="custom-control custom-checkbox h-100 mt-1 mr-2">        <input          type="checkbox"          value="전북"          class="custom-control-input"          id="regionFilter6"        />        <label for="regionFilter6" class="custom-control-label"          >전라북도</label        >      </div>      <div class="custom-control custom-checkbox h-100 mt-1 mr-2">        <input          type="checkbox"          value="전남"          class="custom-control-input"          id="regionFilter7"        />        <label for="regionFilter7" class="custom-control-label"          >전라남도</label        >      </div>      <div class="custom-control custom-checkbox h-100 mt-1 mr-2">        <input          type="checkbox"          value="경북"          class="custom-control-input"          id="regionFilter8"        />        <label for="regionFilter8" class="custom-control-label"          >경상북도</label        >      </div>      <div class="custom-control custom-checkbox h-100 mt-1 mr-2">        <input          type="checkbox"          value="경남"          class="custom-control-input"          id="regionFilter9"        />        <label for="regionFilter9" class="custom-control-label"          >경상남도</label        >      </div>      <div class="custom-control custom-checkbox h-100 mt-1 mr-2">        <input          type="checkbox"          value="제주"          class="custom-control-input"          id="regionFilter10"        />        <label for="regionFilter10" class="custom-control-label"          >제주특별자치도</label        >      </div>    </div>  </div>  <div class="custom-control custom-checkbox ml-1 mt-1">    <input      type="checkbox"      value="시"      class="custom-control-input"      id="regionFilter11"    />    <label for="regionFilter11" class="custom-control-label"      >시</label    >  </div>  <div class="city-container container ml-3">    <div class="row">      <div class="custom-control custom-checkbox h-100 mt-1 mr-2">        <input          type="checkbox"          value="서울"          class="custom-control-input"          id="regionFilter12"        />        <label for="regionFilter12" class="custom-control-label"          >서울특별시</label        >      </div>      <div class="custom-control custom-checkbox h-100 mt-1 mr-2">        <input          type="checkbox"          value="부산"          class="custom-control-input"          id="regionFilter13"        />        <label for="regionFilter13" class="custom-control-label"          >부산광역시</label        >      </div>      <div class="custom-control custom-checkbox h-100 mt-1 mr-2">        <input          type="checkbox"          value="대구"          class="custom-control-input"          id="regionFilter14"        />        <label for="regionFilter14" class="custom-control-label"          >대구광역시</label        >      </div>      <div class="custom-control custom-checkbox h-100 mt-1 mr-2">        <input          type="checkbox"          value="인천"          class="custom-control-input"          id="regionFilter15"        />        <label for="regionFilter15" class="custom-control-label"          >인천광역시</label        >      </div>      <div class="custom-control custom-checkbox h-100 mt-1 mr-2">        <input          type="checkbox"          value="광주"          class="custom-control-input"          id="regionFilter16"        />        <label for="regionFilter16" class="custom-control-label"          >광주광역시</label        >      </div>      <div class="custom-control custom-checkbox h-100 mt-1 mr-2">        <input          type="checkbox"          value="대전"          class="custom-control-input"          id="regionFilter17"        />        <label for="regionFilter17" class="custom-control-label"          >대전광역시</label        >      </div>      <div class="custom-control custom-checkbox h-100 mt-1 mr-2">        <input          type="checkbox"          value="세종"          class="custom-control-input"          id="regionFilter18"        />        <label for="regionFilter18" class="custom-control-label"          >세종특별자치시</label        >      </div>    </div>  </div>  <div class="btn-container d-flex justify-content-end">    <button type="reset" class="btn btn-sm btn-outline-primary">      초기화    </button>    <button      type="button"      class="btn btn-sm btn-outline-primary ml-2"    >      적용    </button>  </div>';
+</script> -->
+{% endblock %} {% block import %}
+<script type="text/javascript" src="{% static 'js/index.js' %}"></script>
 {% endblock %}
