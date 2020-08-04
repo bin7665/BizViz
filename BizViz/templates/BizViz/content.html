@@ -1,3 +1,16 @@
-<div class="support-container">
-    <iframe src="{{ URL }}"" frameborder="0" style="width: 63rem; height: 100%;"></iframe>
+{% load static %}
+<head>
+  <title>BizViz | 지원사업 검색을 한 눈에</title>  
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+  />
+</head>
+<!-- modal 사용시 윗 부분 삭제 가능 -->
+<div class="support-container container">
+    <div class="row">
+        <div class="col-5">
+            <iframe src="{{ EURL }}"" frameborder="0" style="height: 100%;"></iframe>
+        </div>
+    </div>
 </div>
