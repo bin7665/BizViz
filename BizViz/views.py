@@ -1,22 +1,25 @@
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
+from django.views.generic.list import ListView
 from .models import Department, Support
+from django.core import serializers
 
 
-def index(request):
-    supports = Support.objects.order_by('-register_date')
-    context = {
-        'supports': supports,
-    }
-    depart_names = [i['depart_name']
-                    for i in Department.objects.all().values()]
-    depart_statistics = [get_object_or_404(
-        Department, pk=i) for i in depart_names]
-    for i in range(len(depart_names)):
-        context[depart_names[i]] = render_to_string(
-            'BizViz/department.html', {'depart': depart_statistics[i]})
-    # print(context)
-    return render(request, 'BizViz/index.html', context)
+class IndexView(ListView):
+    model = Support
+    paginate_by = 2
+    context_object_name = 'supports'
+    template_name = 'BizViz/index.html'
+    ordering = ['-register_date']
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        # print(list(Department.objects.all())[0].depart_name)
+        departs = Department.objects.filter(
+            depart_name__isnull=False).order_by('depart_name')
+        depart_list = serializers.serialize('json', departs)
+        context['departs'] = depart_list
+        return context
 
 
 def statistics(request):
@@ -26,7 +29,7 @@ def statistics(request):
 
     context = {
         'basic': render_to_string('BizViz/department.html', {'depart': depart_basic}),
-        'compare': render_to_string('BizViz/department.html', {'depart': depart_compare})
+        'compare': render_to_string('BizViz/department.html', {'depart': depart_compare}),
     }
     return render(request, 'BizViz/statistics.html', context)
 

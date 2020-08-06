@@ -168,12 +168,12 @@
       const modal = document.querySelector(".modal-body");
       modal.innerHTML = getBody("./statistics/중소벤처기업부/");
     </script> -->
-    <div class="supports-list row">
+    <div class="supports-list row infinite-container">
       <!-- css 분리 시키기 -->
       <!-- title이 50자 이상일 때는 뒤에 ... 붙이기 -->
       <!-- card background에 기업마당 로고나 bizbot 로고 넣으면 괜찮을 듯 -->
       {% for support in supports %}
-      <div class="col-12 col-sm-6 col-xl-4 my-3">
+      <div class="col-12 col-sm-6 col-xl-4 my-3 infinite-item">
         <div class="support-card card" style="height: 15.5rem;">
           <div class="card-header">
             <div class="support-depart">
@@ -192,11 +192,7 @@
           </div>
           <div class="card-body d-flex flex-column justify-content-between">
             <div class="support-name card-title">
-              {% if support.project_name|length > 50 %}
               <h5>{{ support.project_name|truncatechars:53 }}</h5>
-              {% else %}
-              <h5>{{ support.project_name }}</h5>
-              {% endif %}
             </div>
             <div class="support-d-day card-subtitle align-self-end">
               D - 20
@@ -212,6 +208,17 @@
       </div>
       {% endfor %}
     </div>
+    {% if page_obj.has_next %}
+    <a
+      class="infinite-more-link"
+      href="?page={{ page_obj.next_page_number }}"
+    ></a>
+    {% endif %}
+    <div class="d-flex justify-content-center" style="display: none;">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -226,7 +233,7 @@
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">중소벤처기업부</h5>
+        <h5 class="modal-title"></h5>
         <button
           type="button"
           class="close"
@@ -236,35 +243,142 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        {{중소벤처기업부}}
-      </div>
+      <div class="modal-body"></div>
     </div>
   </div>
 </div>
 
-<iframe src="" frameborder="0"></iframe>
-<!-- Scripts -->
+{% endblock %} {% block script %}
 <script>
-  $(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-  });
-  const modalTitle = document.querySelector(".modal-title");
-  const modalBody = document.querySelector(".modal-body");
+  const modal = document.querySelector(".depart-modal");
+  const pythonDict = "{{ departs }}".replace(/&quot;/g, '"');
+  const parsedDict = JSON.parse(pythonDict);
+  console.log(parsedDict);
   function modalFunction(depart) {
-    const text1 = "{{ ";
-    const text2 = depart + " }}";
+    const modalTitle = document.querySelector(".modal-title");
+    const modalBody = document.querySelector(".modal-body");
+    const departDict = parsedDict.filter((item) => item.pk === depart)[0]
+      .fields;
     modalTitle.innerHTML = depart;
-    // modalBody.innerHTML = "{{중소벤처기업부|safe}}";
+    modalBody.innerHTML = `<div class="department-container container" style="width: 47.5rem;">
+  <div class="row">
+    <div class="department-logo my-auto col-8 col-sm-11 col-lg-4">
+      <img
+        src="../../static/${departDict.depart_image}"
+        alt="${depart} logo"
+        style="width: 100%;"
+      />
+    </div>
+    <div class="department-table col-8 col-sm-11 col-lg-8">
+      <!-- <div class="department-table-detail col-8"> -->
+      <!-- css는 나중에 분리시키기!!!! -->
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th scope="row" style="width: 6rem;" class="text-center">
+              부서이름
+            </th>
+            <td colspan="2">${depart}</td>
+          </tr>
+          <tr>
+            <th
+              scope="row"
+              style="width: 6rem; height: 4.2rem;"
+              class="text-center align-middle"
+            >
+              부서위치
+            </th>
+            <td colspan="2" class="align-middle">${departDict.depart_loc}</td>
+          </tr>
+          <tr>
+            <th scope="row" style="width: 6rem;" class="text-center">
+              지원사업
+            </th>
+            <td colspan="2">${departDict.total_project}</td>
+          </tr>
+          <tr>
+            <th
+              scope="row"
+              style="width: 6rem;"
+              class="text-center align-middle"
+              rowspan="2"
+            >
+              예산
+            </th>
+            <td class="text-center">세입</td>
+            <td>${departDict.tax_income}</td>
+          </tr>
+          <tr>
+            <td class="text-center">세출</td>
+            <td>${departDict.tax_outcome}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="department-graph col-12 my-3">
+      <div class="department-graph-filter">
+        <span class="department-filter-btn">
+          지역 <i class="fas fa-caret-down"></i>
+        </span>
+      </div>
+      <div class="graph-container d-flex justify-content-around m-2">
+        <div class="department-graph-container">
+          <img
+            src="https://i1.wp.com/hleecaster.com/wp-content/uploads/2019/08/4-1.png?w=1200"
+            alt="pie chart 1"
+            style="width: 15rem;"
+          />
+        </div>
+        <div class="department-graph-container">
+          <img
+            src="https://i.pinimg.com/originals/58/d5/dd/58d5dd8f888d50125d65f3141b4c2c19.png"
+            alt="line chart 1"
+            style="width: 30rem;"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="department-description col-12 my-3">
+      <div class="description-title mb-3">
+        <h4>설명</h4>
+      </div>
+      <!-- css는 나중에 분리시키기!!!! -->
+      <div class="description-content" style="height: 11rem;">
+        ${departDict.depart_desc}
+      </div>
+    </div>
+  </div>
+</div>
+`;
   }
-  // const modal = document.querySelector(".depart-modal");
-  // const modalBtn = document.querySelector(".depart-btn");
-  // modalBtn.onclick = function () {
-  //   modal.style.display = "block";
-  //   modal.classList.add("show");
-  // };
 </script>
-{% endblock %} {% block import %}
+
 <script type="text/javascript" src="{% static 'js/datas.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+<script
+  type="text/javascript"
+  src="{% static 'js/jquery-2.2.4.min.js' %}"
+></script>
+<script
+  type="text/javascript"
+  src="{% static 'js/jquery.waypoints.min.js' %}"
+></script>
+<script type="text/javascript" src="{% static 'js/infinite.min.js' %}"></script>
+<script>
+  const infinite = new Waypoint.Infinite({
+    element: $(".infinite-container")[0],
+    handler: function (direction) {},
+    offset: "bottom-in-view",
+    onBeforePageLoad: function () {
+      $(".spinner-border").show();
+    },
+    onAfterPageLoad: function () {
+      $(".spinner-border").hide();
+    },
+  });
+</script>
 {% endblock %}
