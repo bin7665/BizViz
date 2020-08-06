@@ -1,4 +1,4 @@
-{% extends 'BizViz/base.html' %} {% block active %}
+{% extends 'BizViz/base.html' %} {% load static %} {% block active %}
 <li class="nav-item">
   <a class="nav-link" href="/">검색<span class="sr-only">Home</span></a>
 </li>
@@ -19,16 +19,41 @@
           <span class="compare-selected-depart">
             중소벤처기업부 <i class="fas fa-caret-down"></i>
           </span>
+          <div class="dropdown">
+            <button
+              class="btn btn-primary dropdown-toggle"
+              type="button"
+              data-toggle="dropdown"
+            >
+              Dropdown Example <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <input
+                class="form-control basic-search"
+                id="myInput"
+                type="text"
+                placeholder="Search.."
+                onkeydown="departSearch(this)"
+              />
+              <li><a class="dropdown-item" href="#">HTML</a></li>
+              <li><a class="dropdown-item" href="#">CSS</a></li>
+              <li><a class="dropdown-item" href="#">JavaScript</a></li>
+              <li><a class="dropdown-item" href="#">jQuery</a></li>
+              <li><a class="dropdown-item" href="#">Bootstrap</a></li>
+              <li><a class="dropdown-item" href="#">Angular</a></li>
+            </ul>
+          </div>
         </div>
         <div class="basic-department border border-secondary">
           {{ basic }}
         </div>
       </div>
       <div class="compare-exchange align-self-center">
-        <i class="fas fa-exchange-alt fa-4x"></i>
+        <span class="btn">
+          <i class="fas fa-exchange-alt fa-3x"></i>
+        </span>
       </div>
       <div class="statistics-container mr-5">
-        <!-- <iframe src="2" frameborder="0"></iframe> -->
         <div class="select-depart m-2">
           <span class="compare-selected-depart">
             산업통상자원부 <i class="fas fa-caret-down"></i>
@@ -41,4 +66,33 @@
     </div>
   </div>
 </div>
+{% endblock %} {% block script %}
+<script>
+  // NodeList에 filter 추가
+  NodeList.prototype.filter = Array.prototype.filter;
+
+  function departSearch(input) {
+    NodeList.prototype.filter = Array.prototype.filter;
+
+    const dropdownMenu = input.parentElement.querySelectorAll("li");
+    console.log(dropdownMenu);
+    if (event.keyCode == 13) {
+      console.log(input);
+      dropdownMenu.classList.remove("show");
+    }
+    const showList = dropdownMenu.filter(
+      (node) => node.style.display !== "none"
+    );
+    console.log(showList);
+  }
+  // 38 - 위 방향키, 40 - 아래 방향키
+  $(document).ready(function () {
+    $("#myInput").on("keyup", function () {
+      var value = $(this).val().toLowerCase();
+      $(".dropdown-menu li").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+      });
+    });
+  });
+</script>
 {% endblock %}
