@@ -29,7 +29,7 @@ $ python manage.py runserver
   - 각 부서별 통계
     - 세부 분야 파이 차트
     - 연도별 변화 라인 차트
-- [ ] 장고 데이터 자바스크립트에 연결하기
+- [x] ~~장고 데이터 자바스크립트에 연결하기~~
 - [ ] DB에 들어갈 Department 데이터들
   -  부서 이름
   -  부서 위치
@@ -48,9 +48,9 @@ $ python manage.py runserver
   - 분야별
   - 기업형태별
   - 보기 좋은 DropDown
-- [ ] modal 구현
-  - department 통계
-  - 기업마당 지원사업
+- [x] ~~modal 구현~~
+  - ~~department 통계~~
+  - ~~기업마당 지원사업(x) -> 링크로 새로운 창 띄우기~~
 - [ ] 디자인
   - main color 설정
   - 유저 friendly
@@ -59,6 +59,6 @@ $ python manage.py runserver
 - [ ] 보안
   - settings의 secret key
   
-이슈
-- [ ] 공고를 많이 낸 부서 TOP5 데이터
-  - 5위와 6위의 값이 같을 경우
+- [ ] 이슈
+  - top5 데이터(인기지원사업, 공고를 많이 낸 기업)
+    - 5위와 6위의 값이 같을 경우
