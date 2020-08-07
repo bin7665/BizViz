@@ -1,4 +1,10 @@
-{% extends 'BizViz/base.html' %} {% load static %} {% block active %}
+{% extends 'BizViz/base.html' %} {% load static %} {% block css %}
+<style type="text/css">
+  .not-filtered {
+    display: none;
+  }
+</style>
+{% endblock %} {% block active %}
 <li class="nav-item">
   <a class="nav-link" href="/">검색<span class="sr-only">Home</span></a>
 </li>
@@ -33,14 +39,15 @@
                 id="myInput"
                 type="text"
                 placeholder="Search.."
-                onkeydown="departSearch(this)"
+                autocomplete="off"
+                onkeyup="departSearch(this)"
               />
-              <li><a class="dropdown-item" href="#">HTML</a></li>
-              <li><a class="dropdown-item" href="#">CSS</a></li>
-              <li><a class="dropdown-item" href="#">JavaScript</a></li>
-              <li><a class="dropdown-item" href="#">jQuery</a></li>
-              <li><a class="dropdown-item" href="#">Bootstrap</a></li>
-              <li><a class="dropdown-item" href="#">Angular</a></li>
+              <li><a class="dropdown-item filtered" href="#">HTML</a></li>
+              <li><a class="dropdown-item filtered" href="#">CSS</a></li>
+              <li><a class="dropdown-item filtered" href="#">JavaScript</a></li>
+              <li><a class="dropdown-item filtered" href="#">jQuery</a></li>
+              <li><a class="dropdown-item filtered" href="#">Bootstrap</a></li>
+              <li><a class="dropdown-item filtered" href="#">Angular</a></li>
             </ul>
           </div>
         </div>
@@ -72,27 +79,34 @@
   NodeList.prototype.filter = Array.prototype.filter;
 
   function departSearch(input) {
-    NodeList.prototype.filter = Array.prototype.filter;
+    const filter = input.value.toUpperCase();
+    const dropdownMenu = input.parentElement;
+    const dropdownList = dropdownMenu.querySelectorAll("li");
 
-    const dropdownMenu = input.parentElement.querySelectorAll("li");
-    console.log(dropdownMenu);
-    if (event.keyCode == 13) {
-      console.log(input);
-      dropdownMenu.classList.remove("show");
+    console.log(event);
+
+    if (event.keyCode === 13) {
+      console.log("Press Enter key");
+    } else if (event.keyCode === 38) {
+      console.log("Press Up key");
+    } else if (event.keyCode === 40) {
+      console.log("Press Down key");
+    } else {
+      for (let i = 0, length = dropdownList.length; i < length; i++) {
+        li = dropdownList[i];
+        a = li.querySelector("a");
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          li.classList.add("filtered");
+          li.classList.remove("not-filtered");
+        } else {
+          li.classList.remove("filtered");
+          li.classList.add("not-filtered");
+        }
+      }
     }
-    const showList = dropdownMenu.filter(
-      (node) => node.style.display !== "none"
-    );
-    console.log(showList);
   }
-  // 38 - 위 방향키, 40 - 아래 방향키
-  $(document).ready(function () {
-    $("#myInput").on("keyup", function () {
-      var value = $(this).val().toLowerCase();
-      $(".dropdown-menu li").filter(function () {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-      });
-    });
-  });
+  // 13 - enter 키, 38 - 위 방향키, 40 - 아래 방향키
+  // addEventListener를 통해서 onmouseover, onmouseout, onkeyup envent들을 추가하면 될 듯
 </script>
 {% endblock %}
