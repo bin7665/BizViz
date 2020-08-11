@@ -3,10 +3,15 @@
   .not-filtered {
     display: none;
   }
-  ul > .selected {
-    background-color: rgb(249, 249, 249);
+  /* ul > li > dr:active {
+    background-color: #ffffff !important;
+  } */
+  .dropdown-item:active,
+  .dropdown-item:hover {
+    background-color: rgb(255, 255, 255) !important;
+    cursor: default;
   }
-  .dropdown-item:active {
+  .selected > .dropdown-item {
     background-color: rgb(249, 249, 249) !important;
   }
   .btn:focus,
@@ -35,45 +40,30 @@
     <div class="statistics-compare-area d-flex justify-content-around mb-5">
       <div class="statistics-container ml-5">
         <div class="select-depart m-2">
-          <span class="compare-selected-depart">
-            중소벤처기업부 <i class="fas fa-caret-down"></i>
-          </span>
           <div class="dropdown">
-            <button
-              class="btn btn-primary dropdown-toggle"
+            <span
+              class="btn basic-btn dropdown-toggle"
               type="button"
               data-toggle="dropdown"
             >
-              Dropdown Example <span class="caret"></span>
-            </button>
+              {{ departs.0 }} <span class="caret"></span>
+            </span>
             <ul class="dropdown-menu">
               <input
                 class="form-control basic-search"
-                id="myInput"
                 type="text"
                 placeholder="Search.."
                 autocomplete="off"
-                onkeydown="departKeydown(this)"
-                oninput="departInput(this)"
               />
+              {% for depart in departs %} {% if depart == departs.0 %}
               <li class="filtered selected">
-                <a class="dropdown-item">문화체육관광부</a>
+                <a class="dropdown-item">{{ depart }}</a>
               </li>
+              {% else %}
               <li class="filtered">
-                <a class="dropdown-item">산업통상자원부</a>
+                <a class="dropdown-item">{{ depart }}</a>
               </li>
-              <li class="filtered">
-                <a class="dropdown-item">식품의약품안전처</a>
-              </li>
-              <li class="filtered">
-                <a class="dropdown-item">중소벤처기업부</a>
-              </li>
-              <li class="filtered">
-                <a class="dropdown-item">통계부</a>
-              </li>
-              <li class="filtered">
-                <a class="dropdown-item">환경부</a>
-              </li>
+              {% endif %} {% endfor %}
             </ul>
           </div>
         </div>
@@ -88,9 +78,32 @@
       </div>
       <div class="statistics-container mr-5">
         <div class="select-depart m-2">
-          <span class="compare-selected-depart">
-            산업통상자원부 <i class="fas fa-caret-down"></i>
-          </span>
+          <div class="dropdown">
+            <span
+              class="btn basic-btn dropdown-toggle"
+              type="button"
+              data-toggle="dropdown"
+            >
+              {{ departs.0 }} <span class="caret"></span>
+            </span>
+            <ul class="dropdown-menu">
+              <input
+                class="form-control basic-search"
+                type="text"
+                placeholder="Search.."
+                autocomplete="off"
+              />
+              {% for depart in departs %} {% if depart == departs.0 %}
+              <li class="filtered selected">
+                <a class="dropdown-item">{{ depart }}</a>
+              </li>
+              {% else %}
+              <li class="filtered">
+                <a class="dropdown-item">{{ depart }}</a>
+              </li>
+              {% endif %} {% endfor %}
+            </ul>
+          </div>
         </div>
         <div class="compare-department border border-secondary">
           {{ compare }}
@@ -103,7 +116,56 @@
 <script>
   // NodeList에 filter 기능 추가
   NodeList.prototype.filter = Array.prototype.filter;
-  let selectionStart = 0;
+  const basicBtn = document.querySelector(".basic-btn");
+  const basicInput = basicBtn.nextElementSibling.querySelector("input");
+
+  function changeDepartment(btn, text) {
+    btn.innerText = text + " ";
+    // 뒤에 띄는 부서 정보 변경할 공간
+  }
+
+  function buttonClickHandler(event) {
+    const dropdownMenu = event.target.nextElementSibling;
+    const dropdownList = dropdownMenu.querySelectorAll("li");
+    const selected = dropdownMenu.querySelector(".selected");
+    const input = dropdownMenu.querySelector("input");
+
+    selected.classList.remove("selected");
+    input.value = "";
+
+    for (let i = 0, len = dropdownList.length; i < len; i++) {
+      if (i === 0) {
+        dropdownList[i].classList.add("selected");
+      }
+      dropdownList[i].classList.remove("not-filtered");
+      dropdownList[i].classList.add("filtered");
+    }
+
+    window.setTimeout(function () {
+      input.focus();
+    }, 0);
+  }
+
+  basicBtn.addEventListener("click", buttonClickHandler);
+
+  function mouseHoverHandler(event) {
+    const selected = event.path[2].querySelector(".selected");
+    const hovered = event.path[1];
+    selected.classList.remove("selected");
+    hovered.classList.add("selected");
+  }
+
+  function mouseClickHandler(event) {
+    const btn = event.path[3].querySelector(".btn");
+    const text = event.target.innerText;
+    changeDepartment(btn, text);
+  }
+
+  const a = document.querySelectorAll(".filtered");
+  for (let i = 0, len = a.length; i < len; i++) {
+    a[i].addEventListener("mouseover", mouseHoverHandler);
+    a[i].addEventListener("click", mouseClickHandler);
+  }
 
   function initialConsonant(word, consonant) {
     // 초성 검색을 위한 함수
@@ -114,7 +176,8 @@
     return Hangul.search(conso, consonant);
   }
 
-  function departKeydown(input) {
+  function departKeydown(event) {
+    const input = event.target;
     const filter = input.value.toUpperCase();
     const dropdownMenu = input.parentElement;
     const dropdownList = dropdownMenu.querySelectorAll("li");
@@ -127,15 +190,17 @@
 
     if (event.keyCode === 13) {
       // Enter key function
-      console.log("Press Enter key");
-      console.log(filteredList);
+      const btn = event.path[3].querySelector(".btn");
+      const text = event.target.parentElement.querySelector(".selected")
+        .innerText;
+      changeDepartment(btn, text);
+      dropdownMenu.classList.remove("show");
     } else if (event.keyCode === 38) {
       // Arrow up function
       event.preventDefault();
       if (selectedVal > 0) {
         filteredList[selectedVal].classList.remove("selected");
         filteredList[selectedVal - 1].classList.add("selected");
-        console.log(filteredList[selectedVal - 1].innerText);
       }
     } else if (event.keyCode === 40) {
       // Arrow down function
@@ -143,12 +208,13 @@
       if (selectedVal < filteredList.length - 1) {
         filteredList[selectedVal].classList.remove("selected");
         filteredList[selectedVal + 1].classList.add("selected");
-        console.log(filteredList[selectedVal + 1].innerText);
       }
     }
   }
+  basicInput.addEventListener("keydown", departKeydown);
 
-  function departInput(input) {
+  function departInput(event) {
+    const input = event.target;
     const filter = input.value.toUpperCase();
     const dropdownMenu = input.parentElement;
     const dropdownList = dropdownMenu.querySelectorAll("li");
@@ -161,7 +227,6 @@
       event.keyCode !== 39 &&
       event.keyCode !== 40
     ) {
-      console.log(event.keyCode);
       for (let i = 0, length = dropdownList.length; i < length; i++) {
         const li = dropdownList[i];
         const a = li.querySelector("a");
@@ -185,6 +250,7 @@
       }
     }
   }
+  basicInput.addEventListener("input", departInput);
   // 13 - enter 키, 38 - 위 방향키, 40 - 아래 방향키
   // addEventListener를 통해서 onmouseover, onmouseout, onkeyup envent들을 추가하면 될 듯
 </script>

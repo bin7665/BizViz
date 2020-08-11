@@ -27,9 +27,12 @@ def statistics(request):
     depart_basic = get_object_or_404(Department, pk="중소벤처기업부")
     depart_compare = get_object_or_404(Department, pk="산업통상자원부")
 
+    departs = Department.objects.all().order_by('depart_name')
+
     context = {
         'basic': render_to_string('BizViz/department.html', {'depart': depart_basic}),
         'compare': render_to_string('BizViz/department.html', {'depart': depart_compare}),
+        'departs': departs,
     }
     return render(request, 'BizViz/statistics.html', context)
 
