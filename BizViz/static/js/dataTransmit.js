@@ -5,6 +5,7 @@ function modalAction(depart) {
   const departDict = parsedDeparts.filter((item) => item.pk === depart)[0]
     .fields;
   modalTitle.innerHTML = depart;
+  // img에 max-height도 적용하기
   interDatas[0].innerHTML = `<img src="../../static/${departDict.depart_image}" alt="${depart} logo" style="width: 100%;" />`;
   interDatas[1].innerHTML = depart;
   interDatas[2].innerHTML = departDict.depart_loc;
