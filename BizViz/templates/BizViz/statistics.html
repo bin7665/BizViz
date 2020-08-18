@@ -30,6 +30,12 @@
     max-height: 20rem;
   }
 </style>
+<!-- <link rel="stylesheet" href="{% static 'css/chosen.css' %}" /> -->
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.css"
+/>
 {% endblock %} {% block active %}
 <li class="nav-item">
   <a class="nav-link" href="/">검색<span class="sr-only">Home</span></a>
@@ -89,150 +95,12 @@
   </div>
 </div>
 {% endblock %} {% block script %}
+<!-- to select department -->
+<script src="{% static 'js/chosen.jquery.js' %}"></script>
 <script>
-  // scroll event들 추가해주고, 모듈화도 해주자
-  // NodeList에 filter 기능 추가
-
   $(function () {
-    $(".chosen-select").chosen({ width: "30%", search_contains: true });
+    $(".chosen-select").chosen({ search_contains: true });
+    $(".chosen-select").val("강원도").trigger("chosen:updated");
   });
-  // NodeList.prototype.filter = Array.prototype.filter;
-  // const basicBtn = document.querySelector(".basic-btn");
-  // const basicInput = basicBtn.nextElementSibling.querySelector("input");
-
-  // function changeDepartment(btn, text) {
-  //   btn.innerText = text + " ";
-  //   // 뒤에 띄는 부서 정보 변경할 공간
-  // }
-
-  // function buttonClickHandler(event) {
-  //   const dropdownMenu = event.target.nextElementSibling;
-  //   const dropdownList = dropdownMenu.querySelectorAll("li");
-  //   const selected = dropdownMenu.querySelector(".selected");
-  //   const input = dropdownMenu.querySelector("input");
-
-  //   selected.classList.remove("selected");
-  //   input.value = "";
-
-  //   for (let i = 0, len = dropdownList.length; i < len; i++) {
-  //     if (i === 0) {
-  //       dropdownList[i].classList.add("selected");
-  //     }
-  //     dropdownList[i].classList.remove("not-filtered");
-  //     dropdownList[i].classList.add("filtered");
-  //   }
-
-  //   window.setTimeout(function () {
-  //     input.focus();
-  //   }, 0);
-  // }
-
-  // basicBtn.addEventListener("click", buttonClickHandler);
-
-  // function mouseHoverHandler(event) {
-  //   const selected = event.path[2].querySelector(".selected");
-  //   const hovered = event.path[1];
-  //   selected.classList.remove("selected");
-  //   hovered.classList.add("selected");
-  // }
-
-  // function mouseClickHandler(event) {
-  //   const btn = event.path[3].querySelector(".btn");
-  //   const text = event.target.innerText;
-  //   changeDepartment(btn, text);
-  // }
-
-  // const a = document.querySelectorAll(".filtered");
-  // for (let i = 0, len = a.length; i < len; i++) {
-  //   a[i].addEventListener("mouseover", mouseHoverHandler);
-  //   a[i].addEventListener("click", mouseClickHandler);
-  // }
-
-  function initialConsonant(word, consonant) {
-    // 초성 검색을 위한 함수
-    let conso = "";
-    for (let i = 0, len = word.length; i < len; i++) {
-      conso += Hangul.disassemble(word[i])[0];
-    }
-    return Hangul.search(conso, consonant);
-  }
-
-  // function departKeydown(event) {
-  //   const input = event.target;
-  //   const filter = input.value.toUpperCase();
-  //   const dropdownMenu = input.parentElement;
-  //   const dropdownList = dropdownMenu.querySelectorAll("li");
-  //   const filteredList = dropdownList.filter((li) =>
-  //     li.classList.contains("filtered")
-  //   );
-  //   const selectedVal = filteredList.findIndex((li) =>
-  //     li.classList.contains("selected")
-  //   );
-
-  //   if (event.keyCode === 13) {
-  //     // Enter key function
-  //     const btn = event.path[3].querySelector(".btn");
-  //     const text = event.target.parentElement.querySelector(".selected")
-  //       .innerText;
-  //     changeDepartment(btn, text);
-  //     dropdownMenu.classList.remove("show");
-  //   } else if (event.keyCode === 38) {
-  //     // Arrow up function
-  //     event.preventDefault();
-  //     if (selectedVal > 0) {
-  //       filteredList[selectedVal].classList.remove("selected");
-  //       filteredList[selectedVal - 1].classList.add("selected");
-  //     }
-  //   } else if (event.keyCode === 40) {
-  //     // Arrow down function
-  //     event.preventDefault();
-  //     if (selectedVal < filteredList.length - 1) {
-  //       filteredList[selectedVal].classList.remove("selected");
-  //       filteredList[selectedVal + 1].classList.add("selected");
-  //     }
-  //   }
-  // }
-  // basicInput.addEventListener("keydown", departKeydown);
-
-  // function departInput(event) {
-  //   const input = event.target;
-  //   const filter = input.value.toUpperCase();
-  //   const dropdownMenu = input.parentElement;
-  //   const dropdownList = dropdownMenu.querySelectorAll("li");
-  //   let selBool = true;
-
-  //   if (
-  //     event.keyCode !== 13 &&
-  //     event.keyCode !== 37 &&
-  //     event.keyCode !== 38 &&
-  //     event.keyCode !== 39 &&
-  //     event.keyCode !== 40
-  //   ) {
-  //     for (let i = 0, length = dropdownList.length; i < length; i++) {
-  //       const li = dropdownList[i];
-  //       const a = li.querySelector("a");
-  //       const txtValue = (a.textContent || a.innerText).toUpperCase();
-  //       if (
-  //         Hangul.search(txtValue, filter) !== -1 ||
-  //         initialConsonant(txtValue, filter) !== -1
-  //       ) {
-  //         li.classList.add("filtered");
-  //         li.classList.remove("not-filtered");
-  //         li.classList.remove("selected");
-  //         if (selBool) {
-  //           li.classList.add("selected");
-  //           selBool = false;
-  //         }
-  //       } else {
-  //         li.classList.remove("filtered");
-  //         li.classList.remove("selected");
-  //         li.classList.add("not-filtered");
-  //       }
-  //     }
-  //   }
-  // }
-  // basicInput.addEventListener("input", departInput);
-  // 13 - enter 키, 38 - 위 방향키, 40 - 아래 방향키
-  // addEventListener를 통해서 onmouseover, onmouseout, onkeyup envent들을 추가하면 될 듯
 </script>
 {% endblock %}
