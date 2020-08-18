@@ -1,5 +1,7 @@
-<html>
+<!DOCTYPE html>
+<html lang="ko">
   <head>
+    <meta charset="UTF-8" />
     <title>BizViz | 지원사업 검색을 한 눈에</title>
     <!-- Font Awesome -->
     <script
@@ -8,7 +10,7 @@
     ></script>
 
     <!-- korean vocaburally -->
-    <script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
+    <script src="https://unpkg.com/hangul-js" crossorigin="anonymous"></script>
 
     <!-- Bootstrap CSS only -->
     <link
@@ -16,6 +18,11 @@
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
       crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.css"
     />
 
     <!-- Bootstrap JS, Popper.js, and jQuery -->
@@ -34,10 +41,15 @@
       integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
       crossorigin="anonymous"
     ></script>
-    <!-- <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.js"
       crossorigin="anonymous"
-    ></script> -->
+    ></script>
+    <!-- <script
+          src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+          crossorigin="anonymous"
+          ></script> -->
     {% block css %} {% endblock %}
   </head>
   <body>
@@ -130,7 +142,7 @@
         <a href="https://www.bizbot.kr/"> www.bizbot.kr</a>
       </div>
     </footer>
+    <!-- static Scripts import -->
+    {% block script %} {% endblock %}
   </body>
-  <!-- static Scripts import -->
-  {% block script %} {% endblock %}
 </html>
